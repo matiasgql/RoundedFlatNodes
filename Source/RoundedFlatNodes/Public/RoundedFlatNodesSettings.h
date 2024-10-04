@@ -35,7 +35,7 @@ public:
 
 	/** Whether to use gradient on node header or not. Default: false */
 	UPROPERTY(config, EditAnywhere, Category = "Header", DisplayName = "Use Gradient", meta = (ConfigRestartRequired = true))
-	bool bHeaderUseGradient;
+	bool bHeaderUseGradient = true;
 
 	/** Brightness of node header. Default: 0.25 */
 	UPROPERTY(config, EditAnywhere, Category = "Header", DisplayName = "Brightness", meta = (EditCondition = "!bHeaderUseGradient", ClampMin = "0", ClampMax = "1"))
