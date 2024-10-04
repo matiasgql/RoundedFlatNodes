@@ -1,18 +1,18 @@
-// Copyright Les Androïds Associés. All Rights Reserved.
+// Copyright Les Androï¿½ds Associï¿½s. All Rights Reserved.
 
-#include "FlatNodes.h"
-#include "FlatNodesSettings.h"
+#include "RoundedFlatNodes.h"
+#include "RoundedFlatNodesSettings.h"
 #include "Interfaces/IPluginManager.h"
 #include "Slate/SlateGameResources.h"
 #include "Styling/SlateStyleMacros.h"
 #include "EditorStyleSet.h"
 
-#define LOCTEXT_NAMESPACE "FFlatNodesModule"
+#define LOCTEXT_NAMESPACE "FRoundedFlatNodesModule"
 
 #define RootToContentDir Style->RootToContentDir
 
 
-void FFlatNodesModule::StartupModule()
+void FRoundedFlatNodesModule::StartupModule()
 {
 	// This code will execute after your module is loaded into memory; the exact timing is specified in the .uplugin file per-module
 	if (GIsEditor && !IsRunningCommandlet())
@@ -21,57 +21,59 @@ void FFlatNodesModule::StartupModule()
 	}
 }
 
-void FFlatNodesModule::ShutdownModule()
+void FRoundedFlatNodesModule::ShutdownModule()
 {
 	// This function may be called during shutdown to clean up your module.  For modules that support dynamic reloading,
 	// we call this function before unloading the module.
 }
 
-void FFlatNodesModule::ApplyEditorStyle()
+void FRoundedFlatNodesModule::ApplyEditorStyle()
 {
 	FSlateStyleSet* Style = (FSlateStyleSet*)&FAppStyle::Get();
-	Style->SetContentRoot(IPluginManager::Get().FindPlugin("FlatNodes")->GetBaseDir() / TEXT("Resources"));
+	Style->SetContentRoot(IPluginManager::Get().FindPlugin("RoundedFlatNodes")->GetBaseDir() / TEXT("Resources"));
 
-	UFlatNodesSettings* FlatNodesSettings = GetMutableDefault<UFlatNodesSettings>();
-	const bool bHeaderUseGradient = FlatNodesSettings->bHeaderUseGradient;
+	URoundedFlatNodesSettings* RoundedFlatNodesSettings = GetMutableDefault<URoundedFlatNodesSettings>();
 
 	Style->Set("Graph.PlayInEditor", new BOX_BRUSH("Graph/RegularNode_shadow_selected", FMargin(18.0f / 64.0f)));
-
-	Style->Set("Graph.Node.Body", new BOX_BRUSH("Graph/RegularNode_body", FMargin(16.f / 64.f, 25.f / 64.f, 16.f / 64.f, 16.f / 64.f)));
-	Style->Set("Graph.Node.TintedBody", new BOX_BRUSH("Graph/TintedNode_body", FMargin(16.f / 64.f, 25.f / 64.f, 16.f / 64.f, 16.f / 64.f)));
+	
+	Style->Set("Graph.Node.Body", RoundedFlatNodesSettings->CreateBodyBrush(8));
+	Style->Set("Graph.Node.TintedBody", RoundedFlatNodesSettings->CreateBodyBrush(8));
 	Style->Set("Graph.Node.TitleGloss", new BOX_BRUSH("Graph/RegularNode_title_gloss", FMargin(12.0f / 64.0f)));
-	if (bHeaderUseGradient)
-	{
-		Style->Set("Graph.Node.ColorSpill", new BOX_BRUSH("Graph/RegularNode_color_spill", FMargin(8.0f / 64.0f, 3.0f / 32.0f, 0, 0)));
-	}
-	else
-	{
-		FSlateBrush* HeaderBrush = FlatNodesSettings->CreateHeaderBrush();
-		HeaderBrush->Margin = FMargin(0, -1.0f / 32.0f, -3.0f / 20.0f, 0);
-		HeaderBrush->DrawAs = ESlateBrushDrawType::Box;
-		Style->Set("Graph.Node.ColorSpill", HeaderBrush);
-	}
+	
+	FSlateBrush* HeaderBrush = RoundedFlatNodesSettings->CreateHeaderBrush(8);
+	// HeaderBrush->Margin = FMargin(0, -1.0f / 32.0f, -3.0f / 20.0f, 0);
+	Style->Set("Graph.Node.ColorSpill", HeaderBrush);
+	
 	Style->Set("Graph.Node.TitleHighlight", new BOX_BRUSH("Graph/RegularNode_title_highlight", FMargin(16.0f / 64.0f, 1.0f, 16.0f / 64.0f, 0.0f)));
 
 	Style->Set("Graph.Node.ShadowSize", FVector2D(12, 12));
 	Style->Set("Graph.Node.ShadowSelected", new BOX_BRUSH("Graph/RegularNode_shadow_selected", FMargin(18.0f / 64.0f)));
-	Style->Set("Graph.Node.Shadow", new BOX_BRUSH("Graph/RegularNode_shadow", FMargin(18.0f / 64.0f)));
+	// this disable the shadow
+	Style->Set("Graph.Node.Shadow", new BOX_BRUSH("Graph/VarNode_gloss", FMargin(0)));//new BOX_BRUSH("Graph/RegularNode_shadow", FMargin(18.0f / 64.0f)));
 
-	Style->Set("Graph.VarNode.Body", new BOX_BRUSH("Graph/VarNode_body", FMargin(16.f / 64.f, 12.f / 28.f)));
+	Style->Set( "Graph.Pin.Connected_VarA", new IMAGE_BRUSH_SVG( "/Graph/Pin_connected_VarA", FVector2D(16,13)) );
+	Style->Set( "Graph.Pin.Disconnected_VarA", new IMAGE_BRUSH_SVG( "/Graph/Pin_disconnected_VarA", FVector2D(16,13)) );
+	
+	Style->Set("Graph.VarNode.Body", RoundedFlatNodesSettings->CreateBodyBrush(20));
 	Style->Set("Graph.VarNode.ColorSpill", new IMAGE_BRUSH("Graph/VarNode_color_spill", FVector2D(132, 28)));
-	Style->Set("Graph.VarNode.Gloss", new BOX_BRUSH("Graph/VarNode_gloss", FMargin(16.f / 64.f, 16.f / 28.f, 16.f / 64.f, 4.f / 28.f)));
+	Style->Set("Graph.VarNode.Gloss", new BOX_BRUSH("Graph/VarNode_gloss", FMargin(0)));//FMargin(16.f / 64.f, 16.f / 28.f, 16.f / 64.f, 4.f / 28.f)));
 
 	Style->Set("Graph.VarNode.ShadowSelected", new BOX_BRUSH("Graph/VarNode_shadow_selected", FMargin(26.0f / 64.0f)));
 	Style->Set("Graph.VarNode.Shadow", new BOX_BRUSH("Graph/VarNode_shadow", FMargin(26.0f / 64.0f)));
 
+	Style->Set("Graph.Pin.BackgroundHovered", new IMAGE_BRUSH("Graph/Pin_hover_cue", FVector2D(1.f)));
+
 	Style->Set("Graph.CollapsedNode.Body", new BOX_BRUSH("Graph/RegularNode_body", FMargin(16.f / 64.f, 25.f / 64.f, 16.f / 64.f, 16.f / 64.f)));
 	Style->Set("Graph.CollapsedNode.BodyColorSpill", new BOX_BRUSH("Graph/CollapsedNode_Body_ColorSpill", FMargin(16.f / 64.f, 25.f / 64.f, 16.f / 64.f, 16.f / 64.f)));
 
-	Style->Set("Graph.ExecPin.Connected", new IMAGE_BRUSH("Old/Graph/ExecPin_Connected", FVector2D(12.0f, 16.0f)));
-	Style->Set("Graph.ExecPin.Disconnected", new IMAGE_BRUSH("Old/Graph/ExecPin_Disconnected", FVector2D(12.0f, 16.0f)));
-	Style->Set("Graph.ExecPin.ConnectedHovered", new IMAGE_BRUSH("Old/Graph/ExecPin_Connected", FVector2D(12.0f, 16.0f), FLinearColor(0.8f, 0.8f, 0.8f)));
-	Style->Set("Graph.ExecPin.DisconnectedHovered", new IMAGE_BRUSH("Old/Graph/ExecPin_Disconnected", FVector2D(12.0f, 16.0f), FLinearColor(0.8f, 0.8f, 0.8f)));
+	Style->Set("Graph.ExecPin.Connected", new IMAGE_BRUSH_SVG("Old/Graph/ExecPin_Connected", FVector2D(12.0f, 16.0f)));
+	Style->Set("Graph.ExecPin.Disconnected", new IMAGE_BRUSH_SVG("Old/Graph/ExecPin_Disconnected", FVector2D(12.0f, 16.0f)));
+	Style->Set("Graph.ExecPin.ConnectedHovered", new IMAGE_BRUSH_SVG("Old/Graph/ExecPin_Connected", FVector2D(12.0f, 16.0f), FLinearColor(0.8f, 0.8f, 0.8f)));
+	Style->Set("Graph.ExecPin.DisconnectedHovered", new IMAGE_BRUSH_SVG("Old/Graph/ExecPin_Disconnected", FVector2D(12.0f, 16.0f), FLinearColor(0.8f, 0.8f, 0.8f)));
 
+	Style->Set( "Graph.ArrayPin.Connected", new IMAGE_BRUSH_SVG( "/Graph/ArrayPin_connected", FVector2D(11,11) ) );
+	Style->Set( "Graph.ArrayPin.Disconnected", new IMAGE_BRUSH_SVG( "/Graph/ArrayPin_disconnected", FVector2D(11,11) ) );
+	
 	Style->Set("KismetExpression.ReadVariable.Body", new BOX_BRUSH("/Graph/Linear_VarNode_Background", FMargin(16.f / 64.f, 12.f / 28.f)));
 	//Style->Set("KismetExpression.ReadVariable.Gloss", new BOX_BRUSH("/Graph/Linear_VarNode_Gloss", FMargin(16.f / 64.f, 12.f / 28.f)));
 	Style->Set("KismetExpression.ReadAutogeneratedVariable.Body", new BOX_BRUSH("/Graph/Linear_VarNode_Background", FMargin(16.f / 64.f, 12.f / 28.f)));
@@ -86,4 +88,4 @@ void FFlatNodesModule::ApplyEditorStyle()
 
 #undef LOCTEXT_NAMESPACE
 	
-IMPLEMENT_MODULE(FFlatNodesModule, FlatNodes)
+IMPLEMENT_MODULE(FRoundedFlatNodesModule, RoundedFlatNodes)

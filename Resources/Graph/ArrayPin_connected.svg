@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="11" height="11" viewBox="0 0 11 11" fill="none" stroke="none" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <path id="path_1" d="M11 0L11 0L11 11L0 11L0 0L11 0Z" />
+    <rect id="rect_2" x="0" y="0" width="11" height="11" />
+    <clipPath id="clip_path_3">
+      <use xlink:href="#rect_2" />
+    </clipPath>
+  </defs>
+  <g id="Frame" opacity="1" clip-path="url(#clip_path_3)">
+    <g>
+      <use xlink:href="#path_1" style="mix-blend-mode:normal;" />
+      <g>
+        <rect id="Rectangle" width="3" height="3" style="fill:#FFFFFF;fill-rule:evenodd;mix-blend-mode:normal;" />
+        <rect id="Rectangle" width="3" height="3" style="fill:#FFFFFF;fill-rule:evenodd;mix-blend-mode:normal;" transform="translate(4 0)" />
+        <rect id="Rectangle" width="3" height="3" style="fill:#FFFFFF;fill-rule:evenodd;mix-blend-mode:normal;" transform="translate(8 0)" />
+        <rect id="Rectangle" width="3" height="3" style="fill:#FFFFFF;fill-rule:evenodd;mix-blend-mode:normal;" transform="translate(0 4)" />
+        <rect id="Rectangle" width="3" height="3" style="fill:#FFFFFF;fill-rule:evenodd;mix-blend-mode:normal;" transform="translate(4 4)" />
+        <rect id="Rectangle" width="3" height="3" style="fill:#FFFFFF;fill-rule:evenodd;mix-blend-mode:normal;" transform="translate(8 4)" />
+        <rect id="Rectangle" width="3" height="3" style="fill:#FFFFFF;fill-rule:evenodd;mix-blend-mode:normal;" transform="translate(0 8)" />
+        <rect id="Rectangle" width="3" height="3" style="fill:#FFFFFF;fill-rule:evenodd;mix-blend-mode:normal;" transform="translate(4 8)" />
+        <rect id="Rectangle" width="3" height="3" style="fill:#FFFFFF;fill-rule:evenodd;mix-blend-mode:normal;" transform="translate(8 8)" />
+      </g>
+    </g>
+  </g>
+</svg>

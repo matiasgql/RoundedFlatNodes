@@ -1,4 +1,4 @@
-# Flat Nodes
+# Rounded Flat Nodes
 
 A minimalist style for Unreal Engine graph nodes. This plugin add a simplified visual appearance, flatter, that makes graphs clearer and more readable.
 
@@ -12,6 +12,7 @@ Works well on UE4 and UE5, since these files have not changed and the visual app
 
 
 
-### Marketplace
+### Note:
 
-https://www.unrealengine.com/marketplace/en-US/product/flat-nodes
+This is a fork based on [Flat Nodes](https://github.com/brumenn/FlatNodes) that adds rounded corners.
+

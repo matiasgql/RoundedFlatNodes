@@ -1,22 +1,22 @@
-// Copyright Les Androïds Associés. All Rights Reserved.
+// Copyright Les Androï¿½ds Associï¿½s. All Rights Reserved.
 
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Engine/DeveloperSettings.h"
 
-#include "FlatNodesSettings.generated.h"
+#include "RoundedFlatNodesSettings.generated.h"
 
 /**
- * Configure the Flat Nodes plug-in.
+ * Configure the Rounded Flat Nodes plug-in.
  */
 UCLASS(config = EditorPerProjectUserSettings)
-class UFlatNodesSettings : public UDeveloperSettings
+class URoundedFlatNodesSettings : public UDeveloperSettings
 {
 	GENERATED_BODY()
 
 public:
-	UFlatNodesSettings();
+	URoundedFlatNodesSettings();
 
 #if WITH_EDITOR
 	//~ UDeveloperSettings interface
@@ -30,7 +30,8 @@ public:
 	virtual void PostEditChangeProperty(struct FPropertyChangedEvent& PropertyChangedEvent) override;
 #endif
 
-	FSlateBrush* CreateHeaderBrush();
+	FSlateBrush* CreateHeaderBrush(float CornerRadius);
+	FSlateBrush* CreateBodyBrush(float CornerRadius);
 
 	/** Whether to use gradient on node header or not. Default: false */
 	UPROPERTY(config, EditAnywhere, Category = "Header", DisplayName = "Use Gradient", meta = (ConfigRestartRequired = true))

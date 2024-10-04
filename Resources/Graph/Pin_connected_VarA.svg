@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg width="16" height="13" viewBox="0 0 16 13" fill="none" stroke="none" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <path id="path_1" d="M16 0L16 0L16 13L0 13L0 0L16 0Z" />
+    <rect id="rect_2" x="0" y="0" width="16" height="13" />
+    <clipPath id="clip_path_3">
+      <use xlink:href="#rect_2" />
+    </clipPath>
+  </defs>
+  <g id="Frame" opacity="1" clip-path="url(#clip_path_3)">
+    <g>
+      <use xlink:href="#path_1" style="mix-blend-mode:normal;" />
+      <g>
+        <path id="Vector Union" d="M0 6.5Q-1.78814e-07 3.80761 1.90381 1.90381Q3.80761 0 6.5 0Q9.19239 -1.78814e-07 11.0962 1.90381Q12.0461 2.85374 12.5221 4L13.5 4C14.8809 4 16 5.1191 16 6.5C16 7.8809 14.8809 9 13.5 9L12.5221 9Q12.0461 10.1463 11.0962 11.0962Q9.19239 13 6.5 13C4.70508 13 3.17301 12.3654 1.90381 11.0962Q0 9.19239 0 6.5Z" style="fill:#FFFFFF;fill-rule:evenodd;mix-blend-mode:normal;" />
+      </g>
+    </g>
+  </g>
+</svg>

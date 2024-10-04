@@ -1,10 +1,10 @@
-// Copyright Les Androïds Associés. All Rights Reserved.
+// Copyright Les Androï¿½ds Associï¿½s. All Rights Reserved.
 
 #pragma once
 
 #include "CoreMinimal.h"
 
-class FFlatNodesModule : public IModuleInterface
+class FRoundedFlatNodesModule : public IModuleInterface
 {
 public:
 
